@@ -1,5 +1,19 @@
 # http://www.cnblogs.com/LiZhiW/p/4867727.html
 # http://blog.hackroad.com/operations-engineer/linux_server/11271.html
+# http://www.qwolf.com/?p=1387
+
+角色关系对照
+
+elasticsearch 跟 MySQL 中定义资料格式的角色关系对照表如下
+
+MySQL       elasticsearch
+database        index
+table           type
+
+table schema mapping
+row         document
+field       field
+
 
 # insert 
 PUT /twitter/tweet/1

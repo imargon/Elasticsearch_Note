@@ -1,0 +1,103 @@
+# insert 
+PUT /twitter/tweet/1
+{
+  "user":"kimchy",
+  "post_date":"2016-08-07T0:54:25",
+  "message":"trying out Elastic Search"
+}
+
+PUT /twitter/tweet/2
+{
+  "counter":1,
+  "tags":["red"]
+}
+
+# delete
+
+DELETE  /twitter/tweet/_update 
+{
+  
+}
+
+
+
+# ES区分大小写,"{}" 必须另起一行
+# update
+POST /twitter/tweet/2/_update
+{
+  "script": "ctx._source.counter += count",
+  "params":{
+    "count":4
+  }
+}
+
+POST /twitter/tweet/2/_update
+{
+  "script" : "ctx._source.tags += tag",
+  "params" : {"tag":"blue"}
+
+}
+
+# upsert
+POST /twitter/tweet/2/_update
+{ "script":"ctx._source.counter += count",
+   "params" : { "count"  : 4 },
+   "upsert" : {"counter" : 1 }
+}
+
+
+
+
+
+# select
+GET /twitter/tweet/_search
+{
+  "query": {
+    "match_all": {}
+  }
+}
+
+# 精确查询
+# 通过URI查询，即将查询的语句放入到请求的url中
+GET /twitter/tweet/_search?q=user:kimchy
+# 在查询的请求中加入一个doc
+GET /twitter/tweet/_search  
+{
+  " query " : {
+    "term" :{"user" :"kimchy" }
+  }
+}
+
+GET /twitter/tweet/1?fields=message,user&format=json
+GET /twitter/tweet/1?fields=message,user&pretty=true
+
+# query body的定义可以查看query DSL 另外两种查询方式都可以带参数，参数的含义参考URI Request和Request Body。
+# ES的搜索功能是可以跨index和type的，例如下面这几条命令
+
+
+
+# curl -XGET 'http://localhost:9200/twitter/_search?q=user:kimchy'
+# curl -XGET 'http://localhost:9200/twitter/tweet,user/_search?q=user:kimchy'
+# curl -XGET 'http://localhost:9200/kimchy,elasticsearch/tweet/_search?q=tag:wow'
+# curl -XGET 'http://localhost:9200/_all/tweet/\_search?q=tag:wow'
+# curl -XGET 'http://localhost:9200/\_search?q=tag:wow'
+
+
+
+
+GET /twitter/tweet/_search?q=user:kimchy
+GET /twitter/tweet,user/_search?q=user:kimchy
+GET /kimchy/,elasticsearch/tweet/_search?q=tag:wow
+GET /_all/tweet/\_search?q=tag:wow
+GET /\_search?q=tag:wow
+
+
+
+
+# 第一条是在所有的twitter这个index下的所有type中查找，
+# 第二条是在tweet,user这两个type中查找，
+# 第三条是在kimchy,elasticsearch这两个index的tweet这个type中查找，
+# 第四条使用了_all关键字，是在所有的index的tweet的type中查找，第五条更暴力，在所有的index和type中查找。
+
+
+

@@ -1,4 +1,5 @@
-http://localhost:9200/_plugin/kopf/#!/cluster
+
 http://localhost:9200/_plugin/kopf/#!/cluster
 http://localhost:5601/app/sense
-插件与教程 http://pan.baidu.com/
+集群管理:http://localhost:9200/_plugin/head/
+插件与教程L: http://pan.baidu.com/

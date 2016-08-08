@@ -1,3 +1,6 @@
+# http://www.cnblogs.com/LiZhiW/p/4867727.html
+# http://blog.hackroad.com/operations-engineer/linux_server/11271.html
+
 # insert 
 PUT /twitter/tweet/1
 {
@@ -44,9 +47,6 @@ POST /twitter/tweet/2/_update
    "params" : { "count"  : 4 },
    "upsert" : {"counter" : 1 }
 }
-
-
-
 
 
 # select

@@ -5,3 +5,21 @@ http://localhost:5601/app/sense
 插件与教程L: http://pan.baidu.com/
 es python api : https://www.elastic.co/guide/en/elasticsearch/client/python-api/current/index.html
 
+pip install elasticsearch
+pip install pyes
+pip install esclient
+
+>>> from datetime import datetime
+>>> from elasticsearch import Elasticsearch
+
+# by default we connect to localhost:9200
+>>> es = Elasticsearch()
+
+# datetimes will be serialized
+>>> es.index(index="my-index", doc_type="test-type", id=42, body={"any": "data", "timestamp": datetime.now()})
+{u'_id': u'42', u'_index': u'my-index', u'_type': u'test-type', u'_version': 1, u'ok': True}
+
+# but not deserialized
+>>> es.get(index="my-index", doc_type="test-type", id=42)['_source']
+{u'any': u'data', u'timestamp': u'2013-05-12T19:45:31.804229'}
+

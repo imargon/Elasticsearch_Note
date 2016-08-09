@@ -1,0 +1,25 @@
+http://www.sojson.com/blog/85
+http://stackoverflow.com/questions/34564625/how-to-solve-accessdeniedexception-in-elasticsearch
+
+[elasticsearch@localhost bin]$ sh elasticsearch
+Exception in thread "main" java.lang.IllegalStateException: Unable to access 'path.data' (/usr/local/elasticsearch/data/elasticsearch)
+Likely root cause: java.nio.file.AccessDeniedException: /usr/local/elasticsearch/data/elasticsearch
+	at sun.nio.fs.UnixException.translateToIOException(UnixException.java:84)
+	at sun.nio.fs.UnixException.rethrowAsIOException(UnixException.java:102)
+	at sun.nio.fs.UnixException.rethrowAsIOException(UnixException.java:107)
+	at sun.nio.fs.UnixFileSystemProvider.createDirectory(UnixFileSystemProvider.java:384)
+	at java.nio.file.Files.createDirectory(Files.java:674)
+	at java.nio.file.Files.createAndCheckIsDirectory(Files.java:781)
+	at java.nio.file.Files.createDirectories(Files.java:767)
+	at org.elasticsearch.bootstrap.Security.ensureDirectoryExists(Security.java:337)
+	at org.elasticsearch.bootstrap.Security.addPath(Security.java:314)
+	at org.elasticsearch.bootstrap.Security.addFilePermissions(Security.java:259)
+	at org.elasticsearch.bootstrap.Security.createPermissions(Security.java:212)
+	at org.elasticsearch.bootstrap.Security.configure(Security.java:118)
+	at org.elasticsearch.bootstrap.Bootstrap.setupSecurity(Bootstrap.java:196)
+	at org.elasticsearch.bootstrap.Bootstrap.setup(Bootstrap.java:167)
+	at org.elasticsearch.bootstrap.Bootstrap.init(Bootstrap.java:285)
+	at org.elasticsearch.bootstrap.Elasticsearch.main(Elasticsearch.java:35)
+Refer to the log for complete error details.
+
+# user group and others

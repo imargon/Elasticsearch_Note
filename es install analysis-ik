@@ -7,6 +7,31 @@ https://github.com/medcl/elasticsearch-analysis-ik/releases/tag/v5.3.0
 cd analysis-ik
 unzip elasticsearch-analysis-ik-5.3.0.zip 
 注意要使用es用户
+chown -R es:es kibana
 3.安装xpack
+./bin/elasticsearch-plugin install x-pack   
+./bin/kibana-plugin install x-pack
+
+
+4.安装Logstash
+配置source
+https://www.cnblogs.com/phpshen/p/6098333.html
+yum install gem
+gem sources --add https://gems.ruby-china.com/ --remove https://rubygems.org/
+gem sources -l
+gem install bundler
+bundle config mirror.https://rubygems.org https://gems.ruby-china.org/
+cd/usr/local/logstash/
+bin/logstash-plugin install logstash-input-jdbc
+bin/logstash-plugin install logstash-output-elasticsearch
+在/usr/local/logstash/config 中新建配置文件logstash_mysql.conf
+格式参照
+https://segmentfault.com/a/1190000014387486
+5.在线格式化日志工具
+http://www.bejson.com/
+将报错日志，格式化方便查看
+cat  /usr/local/logstash/logs/logstash-plain.log
+
+
 
 

@@ -1,0 +1,12 @@
+
+1.安装kibana 5.3
+参见https://www.elastic.co/guide/en/kibana/5.3/targz.html
+2.安装analysis-ik
+https://github.com/medcl/elasticsearch-analysis-ik/releases/tag/v5.3.0
+在/usr/local/es/elasticsearch-5.3.0/plugins/中mkdir analysis-ik
+cd analysis-ik
+unzip elasticsearch-analysis-ik-5.3.0.zip 
+注意要使用es用户
+3.安装xpack
+
+
